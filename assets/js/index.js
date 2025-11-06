@@ -19,18 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Login
-  const loginForm = document.getElementById('loginForm');
+ const loginForm = document.getElementById('loginForm');
   loginForm.addEventListener('submit', function(e){
     e.preventDefault();
     const usuario = document.getElementById('username').value.trim();
     const pin = document.getElementById('password').value.trim();
 
     if(!usuario || !pin){
-      mostrarAlerta({icon:'error',title:'Error',text:'Debes ingresar tu usuario y tu PIN.'});
+      mostrarAlerta({
+        icon:'error',
+        title:'Error',
+        text:'Debes ingresar tu usuario y tu PIN.'
+      });
       return;
     }
+
     if(!validarPIN(pin)){
-      mostrarAlerta({icon:'error',title:'Error',text:'El PIN debe tener exactamente 4 dígitos numéricos.'});
+      mostrarAlerta({
+        icon:'error',
+        title:'Error',
+        text:'El PIN debe tener exactamente 4 dígitos numéricos.'
+      });
       return;
     }
 
