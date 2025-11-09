@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon Bank - Acciones</title>
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/index.css">
   <link rel="icon" type="image/png" href="assets/img/valor.png">
@@ -11,6 +12,26 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- ✅ Estilo para reducir el tamaño del donut -->
+  <style>
+    #grafDonut {
+      max-width: 240px !important;
+      max-height: 240px !important;
+      margin: 0 auto;
+      display: block;
+    }
+    #graficaModal .modal-dialog {
+      max-width: 650px !important;
+    }
+    #graficaModal .modal-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 0;
+    }
+  </style>
+
 </head>
 <body>
 <main class="container py-5">
@@ -42,6 +63,8 @@
     </div>
   </div>
 </main>
+
+<!-- ================= MODALES ================= -->
 
 <!-- Modal Depósito -->
 <div class="modal fade" id="depositoModal" tabindex="-1">
@@ -78,14 +101,14 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Retirar</button>
+          <button type="submit" class="btn btn-danger">Retirar</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Modal Saldo Simplificado -->
+<!-- Modal Saldo -->
 <div class="modal fade" id="saldoModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -99,7 +122,7 @@
   </div>
 </div>
 
-<!-- Modal Pago Servicios -->
+<!-- Modal Pago -->
 <div class="modal fade" id="pagoModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -123,7 +146,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="montoServicio">Monto a Pagar</label>
+            <label for="montoServicio">Monto</label>
             <input type="number" step="0.01" min="0.01" class="form-control" id="montoServicio" placeholder="0.00" required>
           </div>
         </div>
@@ -136,20 +159,54 @@
   </div>
 </div>
 
-<!-- Modal Gráfica -->
+<!-- ✅ Modal DONUT + DETALLE -->
 <div class="modal fade" id="graficaModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <div class="modal-header"><h5 class="modal-title">Análisis de Transacciones</h5><button class="close" data-dismiss="modal">&times;</button></div>
-      <div class="modal-body"><canvas id="chartTransacciones"></canvas></div>
-      <div class="modal-footer"><button class="btn btn-primary" data-dismiss="modal">Cerrar</button></div>
+      <div class="modal-header">
+        <h5 class="modal-title">Análisis de Transacciones</h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+
+        <canvas id="grafDonut"></canvas>
+
+        <button id="btnQuitarFiltro" class="btn btn-sm btn-secondary mt-2" style="display:none;">
+          Quitar filtro
+        </button>
+
+        <h5 id="tituloDetalle" class="mt-3 mb-2">Detalle reciente</h5>
+
+        <div class="table-responsive" style="max-height:230px; overflow:auto;">
+          <table class="table table-sm table-hover mb-0">
+            <thead>
+              <tr>
+                <th>#</th><th>Fecha</th><th>Tipo</th><th>Servicio</th>
+                <th class="text-end">Monto</th><th class="text-end">Saldo</th>
+              </tr>
+            </thead>
+            <tbody id="bodyDetalle"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+
     </div>
   </div>
 </div>
 
+<!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- ✅ tu acciones.js COMPLETO -->
 <script src="assets/js/acciones.js"></script>
+
 </body>
 </html>
