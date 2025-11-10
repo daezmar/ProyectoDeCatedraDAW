@@ -39,27 +39,27 @@ cargarHisorial();
 actualizarSaldo();
 
 const numeroCuenta = "1234-5678-9012";
-document.getElementById('numeroCuentaValor').textContent = numeroCuenta;
+document.getElementById("numeroCuentaValor").textContent = numeroCuenta;
 
 const params = new URLSearchParams(window.location.search);
-const usuario = params.get('usuario') || "Invitado";
-document.getElementById('saludoUsuario').textContent = `Hola, ${usuario}!`;
+const usuario = params.get("usuario") || "Invitado";
+document.getElementById("saludoUsuario").textContent = `Hola, ${usuario}!`;
 
 Swal.fire({
   icon: "info",
   title: `Bienvenido ${usuario} a Pokémon Bank`,
   text: "Selecciona una operación para comenzar.",
   confirmButtonText: "Continuar",
-  confirmButtonColor: "#007bff"
+  confirmButtonColor: "#007bff",
 });
 
 
 // Toggle saldo
-document.getElementById('toggleSaldo').addEventListener('click',()=>{
-  saldoVisible=!saldoVisible;
-  document.getElementById('saldoValor').textContent = saldoVisible ? `$${saldoReal.toFixed(2)}` : '****';
-  document.getElementById('toggleSaldo').classList.toggle('fa-eye');
-  document.getElementById('toggleSaldo').classList.toggle('fa-eye-slash');
+document.getElementById("toggleSaldo").addEventListener("click", () => {
+  saldoVisible = !saldoVisible;
+  document.getElementById("saldoValor").textContent = saldoVisible ? `$${saldoReal.toFixed(2)}` : "****";
+  document.getElementById("toggleSaldo").classList.toggle("fa-eye");
+  document.getElementById("toggleSaldo").classList.toggle("fa-eye-slash");
 });
 
 
@@ -139,23 +139,24 @@ function Retiro(e) {
 
 }
 
-// Proveedores
+// ================== Pago de servicios ==================
 const proveedores = {
-  Agua:["💧 Anda"],
-  Electricidad:["⚡ Del Sur","⚡ CAESS","⚡ Clesa"],
-  Telefonia:["📱 Movistar","📱 Digicel","📱 Claro"],
-  Cable:["📡 Claro","📡 Tigo","📡 Salnet"]
+  Agua: ["💧 Anda"],
+  Electricidad: ["⚡ Del Sur", "⚡ CAESS", "⚡ Clesa"],
+  Telefonia: ["📱 Movistar", "📱 Digicel", "📱 Claro"],
+  Cable: ["📡 Claro", "📡 Tigo", "📡 Salnet"],
 };
 
-// Cambiar proveedores según servicio
-document.getElementById('servicio').addEventListener('change',function(){
+document.getElementById("servicio").addEventListener("change", function () {
   const sel = this.value;
-  const provSelect = document.getElementById('proveedor');
+  const provSelect = document.getElementById("proveedor");
   provSelect.innerHTML = '<option value="">--Selecciona un proveedor--</option>';
-  if(sel && proveedores[sel]){
-    proveedores[sel].forEach(p=>{
-      const opt = document.createElement('option');
-      opt.value = p; opt.textContent = p; provSelect.appendChild(opt);
+  if (sel && proveedores[sel]) {
+    proveedores[sel].forEach((p) => {
+      const opt = document.createElement("option");
+      opt.value = p;
+      opt.textContent = p;
+      provSelect.appendChild(opt);
     });
   }
 });
